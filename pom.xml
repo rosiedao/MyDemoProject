@@ -49,7 +49,7 @@
         <version>3.2.5</version>
         <configuration>
           <suiteXmlFiles>
-            <file>src/test/java/resources/testng.xml</file>
+            <file>src/main/resources/testng.xml</file>
           </suiteXmlFiles>
         </configuration>
       </plugin>
