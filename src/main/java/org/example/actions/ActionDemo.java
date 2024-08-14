@@ -13,7 +13,6 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class ActionDemo {
-    public String driverPath = "/Users/dungdao/Documents/Setup/chromedriver/chromedriver";
     public WebDriver driver;
     @BeforeTest
     public void startBrowser() {
