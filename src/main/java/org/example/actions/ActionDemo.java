@@ -1,24 +1,26 @@
 package org.example.actions;
 
-import org.example.basicSelenium.AddItemsToCart;
-import org.example.basicSelenium.ProceedToCheckout;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import java.time.Duration;
 
 public class ActionDemo {
     public String driverPath = "/Users/dungdao/Documents/Setup/chromedriver/chromedriver";
     public WebDriver driver;
-    @Before
+    @BeforeTest
     public void startBrowser() {
-        System.setProperty("webdriver.chrome.driver", driverPath);
-        driver = new ChromeDriver();
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions option = new ChromeOptions();
+        option.addArguments("--disable-notifications");
+        driver = new ChromeDriver(option);
         driver.manage().window().maximize();
         driver.get("https://www.lifehack.org/");
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
@@ -36,7 +38,7 @@ public class ActionDemo {
          */
 
     }
-    @After
+    @AfterTest
     public void endTest() {
         driver.quit();
     }

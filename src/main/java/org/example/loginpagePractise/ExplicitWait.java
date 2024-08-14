@@ -1,23 +1,23 @@
 package org.example.loginpagePractise;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
 public class ExplicitWait {
-    public String driverPath = "/Users/dungdao/Documents/Setup/chromedriver/chromedriver";
     public WebDriver driver;
     By txtUsername = By.id("username");
     By txtPassword = By.id("password");
@@ -30,20 +30,17 @@ public class ExplicitWait {
     By labelHome = By.xpath("//a[contains(text(),'ProtoCommerce Home')]");
     By btnOkay = By.id("okayBtn");
 
-    @Before
+    @BeforeTest
     public void startBrowser() {
-        System.setProperty("webdriver.chrome.driver", driverPath);
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions option = new ChromeOptions();
+        option.addArguments("--disable-notifications");
+        driver = new ChromeDriver(option);
         driver.get("https://rahulshettyacademy.com/loginpagePractise/#/");
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
     }
-    @Test
-    public void execute(){
-        login();
-        //selectItems();
-    }
 
+    @Test
     public void login(){
         WebDriverWait webDriverWait = new WebDriverWait(driver,Duration.ofMillis(7000));
         driver.findElement(txtUsername).sendKeys("rahulshettyacademy");
@@ -71,7 +68,7 @@ public class ExplicitWait {
         }
     }
 
-    @After
+    @AfterTest
     public void endTest() {
         driver.quit();
     }

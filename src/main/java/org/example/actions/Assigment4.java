@@ -1,23 +1,26 @@
 package org.example.actions;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.Iterator;
 import java.util.Set;
 
 public class Assigment4 {
-    public String driverPath = "/Users/dungdao/Documents/Setup/chromedriver/chromedriver";
     public WebDriver driver;
-    @Before
+    @BeforeTest
     public void startBrowser() {
-        System.setProperty("webdriver.chrome.driver", driverPath);
-        driver = new ChromeDriver();
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions option = new ChromeOptions();
+        option.addArguments("--disable-notifications");
+        driver = new ChromeDriver(option);
         driver.manage().window().maximize();
         driver.get("https://rahulshettyacademy.com/loginpagePractise/#/");
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
@@ -33,7 +36,7 @@ public class Assigment4 {
         driver.switchTo().window(childId);
         System.out.println(driver.findElement(By.cssSelector(".im-para.red")).getText());
     }
-    @After
+    @AfterTest
     public void endTest() {
         driver.quit();
     }

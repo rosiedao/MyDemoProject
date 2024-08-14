@@ -1,18 +1,14 @@
 package org.example.basicSelenium;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 public class AddItemsToCart {
     //public String driverPath = "/Users/dungdao/Documents/Setup/chromedriver/chromedriver";
